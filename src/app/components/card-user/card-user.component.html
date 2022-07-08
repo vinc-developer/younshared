@@ -14,7 +14,7 @@
 
       <div>
         <ion-buttons>
-          <ion-button>
+          <ion-button >
             <ion-icon name="ellipsis-vertical-outline"></ion-icon>
           </ion-button>
         </ion-buttons>
@@ -48,14 +48,29 @@
 
     <div [hidden]="!hideme[index]">
       <div class="comments" *ngFor="let comm of post.comments">
-        <div>
-          <ion-img src="./assets/images/{{comm.user.pictureProfil}}"></ion-img>
+          <div>
+            <ion-img src="./assets/images/{{comm.user.pictureProfil}}"></ion-img>
+          </div>
+          <div class="contain-comment">
+            <div class="comment-title">
+              <h4>{{comm.user.firstname + ' ' + comm.user.lastname}}</h4>
+
+                <ion-buttons  *ngIf="comm.user.id === currentUser.id">
+                  <ion-button (click)="modal[index] = !modal[index]">
+                    <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+                  </ion-button>
+                </ion-buttons>
+            </div>
+            <div class="modal-comment" [hidden]="!modal[index]" >
+              <ul>
+                <li>Modifier</li>
+                <li (click)="deleteComment(comm)">Supprimer</li>
+              </ul>
+            </div>
+
+            <p>{{comm.text}}</p>
+          </div>
         </div>
-        <div class="contain-comment">
-          <h4>{{comm.user.firstname + ' ' + comm.user.lastname}}</h4>
-          <p>{{comm.text}}</p>
-        </div>
-      </div>
 
       <div class="comment-card">
         <div class="card-img-comment">

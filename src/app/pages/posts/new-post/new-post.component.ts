@@ -36,7 +36,9 @@ export class NewPostComponent implements OnInit {
     const date = new Date();
     const post = new Posts(null, this.user, this.text, 'default.jpg', date.toString(), [], []);
     this.postService.addNewPost(post).subscribe(
-      (response) => this.views.emit(true)
+      (response) => {
+        this.views.emit(true);
+      }
     );
   }
 }

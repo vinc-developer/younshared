@@ -52,7 +52,22 @@
           <ion-img src="./assets/images/{{comm.user.pictureProfil}}"></ion-img>
         </div>
         <div class="contain-comment">
-          <h4>{{comm.user.firstname + ' ' + comm.user.lastname}}</h4>
+          <div class="comment-title">
+            <h4>{{comm.user.firstname + ' ' + comm.user.lastname}}</h4>
+
+            <ion-buttons  *ngIf="comm.user.id === user.id">
+              <ion-button (click)="modal[index] = !modal[index]">
+                <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </div>
+          <div class="modal-comment" [hidden]="!modal[index]" >
+            <ul>
+              <li>Modifier</li>
+              <li (click)="deleteComment(comm)">Supprimer</li>
+            </ul>
+          </div>
+
           <p>{{comm.text}}</p>
         </div>
       </div>

@@ -3,6 +3,7 @@ import { UserService } from 'src/app/services/user.service';
 import {Posts} from '../../models/posts';
 import {PostsService} from '../../services/posts.service';
 import {User} from '../../models/user';
+import {Comment} from '../../models/comment';
 
 @Component({
   selector: 'app-card-user',
@@ -14,6 +15,7 @@ export class CardUserComponent implements OnInit {
   text = '';
   public hideme: any = [];
   currentUser: User;
+  public modal: any = [];
 
   constructor(private postService: PostsService, private userService: UserService) {}
 
@@ -30,7 +32,19 @@ export class CardUserComponent implements OnInit {
       idUser: this.currentUser.id,
       idPost: post.id
     };
-    this.postService.addLike(like).subscribe();
+    this.postService.addLike(like).subscribe(
+      (response) => {
+        this.postsUser.forEach(el => {
+          if(el.id === post.id){
+            const likes = {
+              idUser: this.currentUser.id,
+              idPost: post.id
+            };
+            el.likes.push(likes);
+          }
+        });
+      }
+    );
   }
 
   checkLike(post: Posts) {
@@ -53,11 +67,39 @@ export class CardUserComponent implements OnInit {
   }
 
   deleteLike(post: Posts) {
-   // this.postService.deleteLikeUserProfile(post);
+    const like = {
+      idUser: this.currentUser.id,
+      idPost: post.id
+    };
+    this.postService.deleteLike(like).subscribe(
+      (response) => {
+        this.postsUser.forEach(el => {
+          if(el.id === post.id){
+            el.likes.forEach(ele => {
+              if(ele.idUser === 1){
+                el.likes.splice(el.likes.findIndex(v => v.idUser === 1), 1);
+              }
+            });
+          }
+        });
+      }
+    );
   }
 
-  deleteComment(post: Posts){
-
+  deleteComment(com: Comment){
+    this.postService.deleteComment(com.id).subscribe(
+      (response) => {
+        this.postsUser.forEach(el => {
+          if(el.id === com.idPost){
+            el.comments.forEach(ele => {
+              if(ele.user.id === this.currentUser.id){
+                el.comments.splice(el.comments.findIndex(v => v.id === com.id), 1);
+              }
+            });
+          }
+        });
+      }
+    );
   }
 
   addComment(post: Posts) {
@@ -68,7 +110,14 @@ export class CardUserComponent implements OnInit {
       user: this.currentUser
     };
     this.postService.addComment(com).subscribe(
-      (response) =>  this.text = ''
+       (response) => {
+        this.postsUser.forEach(el => {
+          if (el.id === post.id){
+            el.comments.push(response);
+          }
+        });
+        this.text = '';
+      }
     );
   }
 }

@@ -4,6 +4,7 @@ import {Posts} from '../../models/posts';
 import {PostsService} from '../../services/posts.service';
 import {User} from '../../models/user';
 import {UserService} from '../../services/user.service';
+import {Comment} from '../../models/comment';
 
 @Component({
   selector: 'app-card-home',
@@ -15,6 +16,7 @@ export class CardHomeComponent implements OnInit {
   text = '';
   user: User;
   public hideme: any = [];
+  public modal: any = [];
 
   constructor(private postService: PostsService, private userService: UserService) {}
 
@@ -31,7 +33,19 @@ export class CardHomeComponent implements OnInit {
       idUser: this.user.id,
       idPost: post.id
     };
-    this.postService.addLike(like).subscribe();
+    this.postService.addLike(like).subscribe(
+      (response) => {
+        this.posts.forEach(el => {
+          if(el.id === post.id){
+            const likes = {
+              idUser: this.user.id,
+              idPost: post.id
+            };
+            el.likes.push(likes);
+          }
+        });
+      }
+    );
   }
 
   checkLike(post: Posts) {
@@ -53,11 +67,39 @@ export class CardHomeComponent implements OnInit {
   }
 
   deleteLike(post: Posts) {
-    this.postService.deleteLike(post);
+    const like = {
+      idUser: this.user.id,
+      idPost: post.id
+    };
+    this.postService.deleteLike(like).subscribe(
+      (response) => {
+        this.posts.forEach(el => {
+          if(el.id === post.id){
+            el.likes.forEach(ele => {
+              if(ele.idUser === 1){
+                el.likes.splice(el.likes.findIndex(v => v.idUser === 1), 1);
+              }
+            });
+          }
+        });
+      }
+    );
   }
 
-  deleteComment(post: Posts){
-
+  deleteComment(com: Comment){
+    this.postService.deleteComment(com.id).subscribe(
+      (response) => {
+        this.posts.forEach(el => {
+          if(el.id === com.idPost){
+            el.comments.forEach(ele => {
+              if(ele.user.id === this.user.id){
+                el.comments.splice(el.comments.findIndex(v => v.id === com.id), 1);
+              }
+            });
+          }
+        });
+      }
+    );
   }
 
   addComment(post: Posts) {
@@ -68,7 +110,13 @@ export class CardHomeComponent implements OnInit {
       user: this.user
     };
     this.postService.addComment(com).subscribe(
-      (response) =>  this.text = ''
-    );
+      (response) => {
+        this.posts.forEach(el => {
+          if (el.id === post.id){
+            el.comments.push(response);
+          }
+        });
+        this.text = '';
+      });
   }
 }

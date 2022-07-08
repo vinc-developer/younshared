@@ -180,7 +180,6 @@ export class PostsService {
   constructor(private serviceUser: UserService, private http: HttpClient) { }
 
   /* home */
-
   getAllPosts(): Observable<Posts[]>{
    // return of(this.postService);
     return this.http.get<any>(`${this.baseUrl}/posts/get-all-home`);
@@ -188,58 +187,23 @@ export class PostsService {
 
   addLike(like: Like): Observable<Like>{
     return this.http.post<any>(`${this.baseUrl}/likes/insert-like`, {like});
-    /*this.postService.forEach(el => {
-      if(el.id === post.id){
-        const like = {
-          idUser: 1,
-          idPost: post.id
-        };
-        el.likes.push(like);
-      }
-    });*/
-
   }
 
-  deleteLike(post: Posts) {
-    this.postService.forEach(el => {
-      if(el.id === post.id){
-        el.likes.forEach(ele => {
-          if(ele.idUser === 1){
-            el.likes.splice(el.likes.findIndex(v => v.idUser === 1), 1);
-          }
-        });
-      }
-    });
+  deleteLike(like: Like): Observable<any> {
+    return this.http.post(`${this.baseUrl}/likes/delete-like`, {like});
   }
 
   addComment(com: Comment): Observable<Comment> {
     return this.http.post<any>(`${this.baseUrl}/comments/insert-comment`, {com});
-    /*this.postService.forEach(el => {
-      if (el.id === post.id){
-        const com = {
-          id: 100,
-          idPost: post.id,
-          // eslint-disable-next-line max-len
-          text,
-          user: {
-            id: 1,
-            firstname: 'Vincent',
-            lastname: 'Colas',
-            pictureProfil: 'profile.png',
-            work: 'developpeur'
-          }
-        };
-        el.comments.push(com);
-      }
-    });*/
   }
 
-  deleteComment(com: Comment){}
+  deleteComment(id: number): Observable<any>{
+    return this.http.delete(`${this.baseUrl}/comments/delete-by-id/` + id);
+  }
 
   updateComment(com: Comment){}
 
   /* profil user */
-
   getAllPostsByUser(): Observable<Posts[]> {
     let user: User;
     this.serviceUser.currentUser().subscribe(
@@ -254,8 +218,6 @@ export class PostsService {
 
   /* posts */
   addNewPost(post: Posts): Observable<Posts> {
-    console.log(post);
-    //this.postService.push(post);
     return this.http.post<Posts>(`${this.baseUrl}/posts/insert-new-post`, {post});
   }
 
