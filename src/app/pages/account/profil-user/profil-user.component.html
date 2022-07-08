@@ -6,15 +6,15 @@
     </div>
   </div>
   <div class="user-img-profil">
-    <ion-img src="./assets/images/{{user.pictureProfil}}"></ion-img>
+    <ion-img src="./assets/images/{{user?.pictureProfil}}"></ion-img>
     <div (click)="updateImgProfile()" class="update-img-profile">
       <ion-icon name="camera-outline"></ion-icon>
     </div>
   </div>
 
   <div class="about-user">
-    <h1>{{user.firstname + ' ' + user.lastname}}</h1>
-    <h3>{{user.work}}</h3>
+    <h1>{{user?.firstname + ' ' + user?.lastname}}</h1>
+    <h3>{{user?.work}}</h3>
   </div>
 
   <div class="gestion-profil">

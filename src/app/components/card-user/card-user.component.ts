@@ -18,11 +18,19 @@ export class CardUserComponent implements OnInit {
   constructor(private postService: PostsService, private userService: UserService) {}
 
   ngOnInit() {
-    this.currentUser = this.userService.currentUser();
+     this.userService.currentUser().subscribe(
+      (response) => {
+        this.currentUser = response;
+      }
+    );
   }
 
   addLike(post: Posts) {
-    this.postService.addLikeUserProfile(post);
+    const like = {
+      idUser: this.currentUser.id,
+      idPost: post.id
+    };
+    this.postService.addLike(like).subscribe();
   }
 
   checkLike(post: Posts) {
@@ -45,12 +53,22 @@ export class CardUserComponent implements OnInit {
   }
 
   deleteLike(post: Posts) {
-    this.postService.deleteLikeUserProfile(post);
+   // this.postService.deleteLikeUserProfile(post);
+  }
+
+  deleteComment(post: Posts){
+
   }
 
   addComment(post: Posts) {
-    this.postService.addCommentUserProfile(post, this.text);
-    this.text = '';
+    const com = {
+      id: null,
+      idPost: post.id,
+      text: this.text,
+      user: this.currentUser
+    };
+    this.postService.addComment(com).subscribe(
+      (response) =>  this.text = ''
+    );
   }
-
 }

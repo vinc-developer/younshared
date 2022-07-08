@@ -1,5 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {PostsService} from '../../../services/posts.service';
+import {UserService} from '../../../services/user.service';
+import {User} from '../../../models/user';
+import {Posts} from '../../../models/posts';
 
 @Component({
   selector: 'app-new-post',
@@ -8,18 +11,18 @@ import {PostsService} from '../../../services/posts.service';
 })
 export class NewPostComponent implements OnInit {
   @Output() views = new EventEmitter<any>();
-  user = {
-  id: 1,
-  firstname: 'Vincent',
-  lastname: 'Colas',
-  pictureProfil: 'profile.png',
-  work: 'developpeur'
-};
+  user: User;
   text = '';
 
-  constructor(private postService: PostsService) { }
+  constructor(private postService: PostsService, private serviceUser: UserService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.serviceUser.currentUser().subscribe(
+      (data) => {
+        this.user = data;
+      }
+    );
+  }
 
   close() {
     this.views.emit(true);
@@ -30,7 +33,10 @@ export class NewPostComponent implements OnInit {
   }
 
   addPost() {
-    this.postService.addNewPost(this.text);
-    this.views.emit(true);
+    const date = new Date();
+    const post = new Posts(null, this.user, this.text, 'default.jpg', date.toString(), [], []);
+    this.postService.addNewPost(post).subscribe(
+      (response) => this.views.emit(true)
+    );
   }
 }

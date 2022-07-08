@@ -11,17 +11,23 @@ import {PostsService} from '../../../services/posts.service';
 })
 export class ProfilUserComponent implements OnInit {
   user: User;
-  posts: Posts[] = [];
+  posts: Posts[];
 
   constructor(private serviceUser: UserService, private postService: PostsService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.serviceUser.currentUser().subscribe(
+      (data) => {
+        this.user = data;
+      }
+    );
     this.postService.getAllPostsByUser().subscribe(
       (response) => {
         this.posts = response;
+
       }
     );
-    this.user = this.serviceUser.currentUser();
+
   }
 
   updateBanniere() {

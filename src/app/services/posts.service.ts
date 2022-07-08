@@ -4,6 +4,9 @@ import {Posts} from '../models/posts';
 import {UserService} from './user.service';
 import { HttpClient } from '@angular/common/http';
 import {environment} from '../../environments/environment';
+import {User} from '../models/user';
+import {Comment} from '../models/comment';
+import {Like} from '../models/like';
 
 @Injectable({
   providedIn: 'root'
@@ -179,12 +182,13 @@ export class PostsService {
   /* home */
 
   getAllPosts(): Observable<Posts[]>{
-    return of(this.postService);
-   // return this.http.get<any>(`${this.baseUrl}/posts/get-all-home`);
+   // return of(this.postService);
+    return this.http.get<any>(`${this.baseUrl}/posts/get-all-home`);
   }
 
-  addLike(post: Posts){
-    this.postService.forEach(el => {
+  addLike(like: Like): Observable<Like>{
+    return this.http.post<any>(`${this.baseUrl}/likes/insert-like`, {like});
+    /*this.postService.forEach(el => {
       if(el.id === post.id){
         const like = {
           idUser: 1,
@@ -192,7 +196,8 @@ export class PostsService {
         };
         el.likes.push(like);
       }
-    });
+    });*/
+
   }
 
   deleteLike(post: Posts) {
@@ -207,8 +212,9 @@ export class PostsService {
     });
   }
 
-  addComment(post: Posts, text: string){
-    this.postService.forEach(el => {
+  addComment(com: Comment): Observable<Comment> {
+    return this.http.post<any>(`${this.baseUrl}/comments/insert-comment`, {com});
+    /*this.postService.forEach(el => {
       if (el.id === post.id){
         const com = {
           id: 100,
@@ -225,80 +231,35 @@ export class PostsService {
         };
         el.comments.push(com);
       }
-    });
+    });*/
   }
+
+  deleteComment(com: Comment){}
+
+  updateComment(com: Comment){}
 
   /* profil user */
 
-  getAllPostsByUser(): Observable<Posts[]>{
-    const user = this.serviceUser.currentUser();
-    return of(this.postUser);
-  }
-
-  addLikeUserProfile(post: Posts){
-    this.postUser.forEach(el => {
-      if(el.id === post.id){
-        const like = {
-          idUser: 1,
-          idPost: post.id
-        };
-        el.likes.push(like);
+  getAllPostsByUser(): Observable<Posts[]> {
+    let user: User;
+    this.serviceUser.currentUser().subscribe(
+      (response) => {
+        user = response;
       }
-    });
-  }
+    );
 
-  deleteLikeUserProfile(post: Posts) {
-    this.postUser.forEach(el => {
-      if(el.id === post.id){
-        el.likes.forEach(ele => {
-          if(ele.idUser === 1){
-            el.likes.splice(el.likes.findIndex(v => v.idUser === 1), 1);
-          }
-        });
-      }
-    });
-  }
-
-  addCommentUserProfile(post: Posts, text: string){
-    this.postUser.forEach(el => {
-      if (el.id === post.id){
-        const com = {
-          id: 100,
-          idPost: post.id,
-          // eslint-disable-next-line max-len
-          text,
-          user: {
-            id: 1,
-            firstname: 'Vincent',
-            lastname: 'Colas',
-            pictureProfil: 'profile.png',
-            work: 'developpeur'
-          }
-        };
-        el.comments.push(com);
-      }
-    });
+    return this.http.get<Posts[]>(`${this.baseUrl}/posts/get-all-by-user/` + 1);
+    //return of(this.postUser)
   }
 
   /* posts */
-  addNewPost(text: string) {
-    const date = new Date();
-    const post = {
-        id: 1,
-        user: {
-          id: 1,
-          firstname: 'Vincent',
-          lastname: 'Colas',
-          pictureProfil: 'profile.png',
-          work: 'developpeur'
-        },
-        // eslint-disable-next-line max-len
-        text,
-        picturePost: 'default.jpg',
-        date: date.toString(),
-        comments: [],
-        likes: [],
-    };
-    this.postService.push(post);
+  addNewPost(post: Posts): Observable<Posts> {
+    console.log(post);
+    //this.postService.push(post);
+    return this.http.post<Posts>(`${this.baseUrl}/posts/insert-new-post`, {post});
   }
+
+  updatePost(post: Posts){}
+
+  deletePost(post: Posts){}
 }

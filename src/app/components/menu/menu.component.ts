@@ -9,14 +9,17 @@ import {NavController} from '@ionic/angular';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
-  user: User;
-
   @Output() menu = new EventEmitter<any>();
+  user: User;
 
   constructor(private userService: UserService, private navCtrl: NavController) { }
 
   ngOnInit() {
-    this.user = this.userService.currentUser();
+    this.userService.currentUser().subscribe(
+      (response) => {
+        this.user = response;
+      }
+    );
   }
 
   goTo(link: string) {

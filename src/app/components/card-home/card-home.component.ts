@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {Posts} from '../../models/posts';
 import {PostsService} from '../../services/posts.service';
+import {User} from '../../models/user';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-card-home',
@@ -11,22 +13,25 @@ import {PostsService} from '../../services/posts.service';
 export class CardHomeComponent implements OnInit {
   @Input() posts: Posts[];
   text = '';
+  user: User;
   public hideme: any = [];
-  currentUser = {
-    id: 1,
-    firstname: 'Vincent',
-    lastname: 'Colas',
-    pictureProfil: 'profile.png',
-    work: 'developpeur'
-  };
 
-  constructor(private postService: PostsService) {}
+  constructor(private postService: PostsService, private userService: UserService) {}
 
   ngOnInit() {
+    this.userService.currentUser().subscribe(
+      (response) => {
+        this.user = response;
+      }
+    );
   }
 
   addLike(post: Posts) {
-    this.postService.addLike(post);
+    const like = {
+      idUser: this.user.id,
+      idPost: post.id
+    };
+    this.postService.addLike(like).subscribe();
   }
 
   checkLike(post: Posts) {
@@ -36,11 +41,10 @@ export class CardHomeComponent implements OnInit {
 
     // eslint-disable-next-line guard-for-in,@typescript-eslint/prefer-for-of
     for (let i = 0; i < post.likes.length; i++){
-      if(post.likes[i].idUser === this.currentUser.id){
+      if(post.likes[i].idUser === this.user.id){
         isLiked = !isLiked;
       }
     }
-
     if(isLiked){
       return like;
     }else{
@@ -52,8 +56,19 @@ export class CardHomeComponent implements OnInit {
     this.postService.deleteLike(post);
   }
 
+  deleteComment(post: Posts){
+
+  }
+
   addComment(post: Posts) {
-    this.postService.addComment(post, this.text);
-    this.text = '';
+    const com = {
+      id: null,
+      idPost: post.id,
+      text: this.text,
+      user: this.user
+    };
+    this.postService.addComment(com).subscribe(
+      (response) =>  this.text = ''
+    );
   }
 }
