@@ -1,0 +1,71 @@
+<ion-content>
+  <ion-card *ngFor="let post of postsUser; let index = index">
+    <ion-card-header>
+      <div class="card-create">
+        <div class="card-img-profil">
+          <ion-img src="./assets/images/{{post.user.pictureProfil}}"></ion-img>
+        </div>
+        <div>
+          <ion-card-title>{{post.user.firstname + ' ' + post.user.lastname}}</ion-card-title>
+          <ion-card-subtitle slot="start">{{post.user.work |  titlecase }}</ion-card-subtitle>
+          <ion-card-subtitle slot="start">{{post.date | date: 'dd/MM/yyyy'}}</ion-card-subtitle>
+        </div>
+      </div>
+
+      <div>
+        <ion-buttons>
+          <ion-button>
+            <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </div>
+    </ion-card-header>
+    <ion-img src="./assets/images/{{post.picturePost}}"></ion-img>
+    <ion-card-content>{{post.text}}</ion-card-content>
+
+    <div id="divider"></div>
+
+    <div class="nb-reaction">
+      <p> <ion-icon name="thumbs-up" class="isLiked"></ion-icon> <span> {{ post.likes.length }}</span></p>
+      <p>{{ post.comments.length }} commentaires</p>
+    </div>
+    <ion-toolbar class="social-toolbar">
+      <ion-segment>
+        <ion-button (click)="checkLike(post) === 'isLiked' ? deleteLike(post) : addLike(post)">
+          <ion-icon name="thumbs-up-outline" *ngIf="checkLike(post) !== 'isLiked'"></ion-icon>
+          <ion-icon name="thumbs-up" class="isLiked" *ngIf="checkLike(post) === 'isLiked'"></ion-icon>
+        </ion-button>
+
+        <ion-button (click)="hideme[index] = !hideme[index]">
+          <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+        </ion-button>
+
+        <ion-button >
+          <ion-icon name="share-social-outline"></ion-icon>
+        </ion-button>
+      </ion-segment>
+    </ion-toolbar>
+
+    <div [hidden]="!hideme[index]">
+      <div class="comments" *ngFor="let comm of post.comments">
+        <div>
+          <ion-img src="./assets/images/{{comm.user.pictureProfil}}"></ion-img>
+        </div>
+        <div class="contain-comment">
+          <h4>{{comm.user.firstname + ' ' + comm.user.lastname}}</h4>
+          <p>{{comm.text}}</p>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div class="card-img-comment">
+          <ion-img src="./assets/images/{{post.user.pictureProfil}}"></ion-img>
+        </div>
+        <ion-input placeholder="Je commente ?" [(ngModel)]="text"></ion-input>
+        <ion-button (click)="addComment(post)">
+          <ion-icon name="send"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+  </ion-card>
+</ion-content>

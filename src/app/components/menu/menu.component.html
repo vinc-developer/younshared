@@ -1,0 +1,25 @@
+<div>
+  <div class="user">
+    <div class="card-img-profil">
+      <ion-img src="./assets/images/{{user.pictureProfil}}"></ion-img>
+    </div>
+    <div class="about-user">
+      <ion-card-title>{{user.firstname + ' ' + user.lastname}}</ion-card-title>
+      <ion-card-subtitle slot="start">{{user.work}}</ion-card-subtitle>
+    </div>
+  </div>
+
+  <div id="divider"></div>
+
+  <ul>
+    <li (click)="goTo('profile')">Profile</li>
+    <li>Messages</li>
+    <li>Friends</li>
+    <li>Settings</li>
+  </ul>
+
+  <div class="logout">
+    <ion-button class="btn-logout">Logout</ion-button>
+  </div>
+
+</div>

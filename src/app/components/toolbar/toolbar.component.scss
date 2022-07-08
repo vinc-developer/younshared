@@ -1,0 +1,22 @@
+ion-toolbar{
+  --color: black;
+  --background: #FBBE00;
+}
+.menu{
+  align-items: center;
+  cursor: pointer;
+
+  ion-title{
+    padding-right: 0.3rem;
+  }
+
+  ion-icon{
+    font-size: 1.1rem;
+  }
+}
+.list-button-end-toolbar{
+  ion-button{
+    font-size: 1.2rem;
+  }
+
+}

@@ -1,0 +1,32 @@
+<ion-content [fullscreen]="true">
+  <div class="baniere">
+    <img src="./assets/images/baniere.jpg" />
+    <div (click)="updateBanniere()" class="update-banniere">
+      <ion-icon name="camera-outline"></ion-icon>
+    </div>
+  </div>
+  <div class="user-img-profil">
+    <ion-img src="./assets/images/{{user.pictureProfil}}"></ion-img>
+    <div (click)="updateImgProfile()" class="update-img-profile">
+      <ion-icon name="camera-outline"></ion-icon>
+    </div>
+  </div>
+
+  <div class="about-user">
+    <h1>{{user.firstname + ' ' + user.lastname}}</h1>
+    <h3>{{user.work}}</h3>
+  </div>
+
+  <div class="gestion-profil">
+    <ion-button class="btn-profile">Modifier profil</ion-button>
+    <ion-button class="btn-publication">Gérer publication</ion-button>
+  </div>
+
+  <div id="divider"></div>
+
+  <div class="post-users">
+    <app-card-user [postsUser]="posts"></app-card-user>
+  </div>
+
+</ion-content>
+

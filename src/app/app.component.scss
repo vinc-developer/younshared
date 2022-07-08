@@ -1,0 +1,40 @@
+.view-new-post{
+  position: absolute;
+  z-index: 4;
+  height: 100%;
+  width: 100%;
+  bottom: 100%;
+  transition: all 1s ease;
+  transform: translate(0, 100%);
+}
+.view-new-post-none{
+  position: absolute;
+  z-index: 4;
+  height: 100%;
+  width: 100%;
+  bottom: -100%;
+  transition: all 1s ease;
+  transform: translate(0, 100%);
+}
+.app-menu{
+  position: absolute;
+  z-index: 3;
+  height: 100%;
+  background: #3d3b3a;;
+  transition: all 1s ease;
+  width: 80%;
+  opacity: 0.9;
+  left: 80%;
+  transform: translate(-100%, 0);
+}
+.app-menu-none{
+  position: absolute;
+  z-index: 3;
+  height: 100%;
+  background: #3d3b3a;;
+  transition: all 1s ease;
+  width: 80%;
+  opacity: 0.9;
+  left: -80%;
+  transform: translate(-100%, 0);
+}

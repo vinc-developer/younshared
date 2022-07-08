@@ -1,0 +1,7 @@
+{
+  "name": "You n Shared",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

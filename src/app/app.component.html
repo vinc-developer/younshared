@@ -1,0 +1,22 @@
+<ion-app>
+  <ion-header>
+    <app-toolbar (menu)="openMenu($event)"></app-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <div [ngClass]="menu ? 'app-menu' : 'app-menu-none'">
+      <app-menu (menu)="openMenu($event)"></app-menu>
+    </div>
+
+    <ion-router-outlet *ngIf="!item"></ion-router-outlet>
+
+    <div [ngClass]="item ? 'view-new-post' : 'view-new-post-none'" >
+      <app-new-post (views)="addPost($event)"></app-new-post>
+    </div>
+
+  </ion-content>
+
+  <ion-footer>
+    <app-bottom-bar (views)="addPost($event)" ></app-bottom-bar>
+  </ion-footer>
+</ion-app>

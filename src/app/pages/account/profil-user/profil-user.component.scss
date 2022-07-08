@@ -1,0 +1,111 @@
+ion-content{
+  height: auto !important;
+}
+.baniere{
+  width: 100%;
+  height: 230px !important;
+
+  img{
+    height: 100%;
+    width: 100%;
+  }
+  .update-banniere{
+    font-size: 2rem;
+    cursor: pointer;
+
+    ion-icon{
+      color: #FBBE00;
+      background: black;
+      border-radius: 50%;
+      opacity: 0.5;
+      border: 1px solid black;
+      padding: 0.5rem;
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+    }
+  }
+}
+
+.user-img-profil{
+  display: flex;
+  justify-content: center;
+  margin-top: -6rem;
+
+  ion-img{
+    width: 50%;
+    border: 3px solid #FBBE00;
+    border-radius: 50%;
+  }
+
+  .update-img-profile{
+    font-size: 2rem;
+    cursor: pointer;
+
+    ion-icon{
+      color: #FBBE00;
+      background: black;
+      border-radius: 50%;
+      border: 1px solid #FBBE00;
+      padding: 0.5rem;
+      bottom: 0;
+      position: absolute;
+      right: 6.2rem;
+      top: 17rem;
+    }
+  }
+}
+
+.about-user{
+  text-align: center;
+
+  h1{
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #FBBE00;
+  }
+  h3{
+    font-size: 2rem;
+    text-transform: capitalize;
+  }
+}
+
+.gestion-profil{
+  display: flex;
+  justify-content: space-evenly;
+  margin: 1rem auto;
+
+  .btn-profile{
+    --background: #3d3b3a;
+    --color: #FBBE00;
+    font-weight: bold;
+  }
+
+  .btn-publication{
+    --background: #FBBE00;
+    --color: #3d3b3a;
+    font-weight: bold;
+  }
+
+  .btn-profile:hover{
+    --background: #FBBE00 !important;
+    --color: #3d3b3a !important;
+  }
+
+  .btn-publication:hover{
+    --background: #3d3b3a;
+    --color: #FBBE00;
+  }
+}
+
+#divider{
+  width: 90% !important;
+  height: 1px !important;
+  background: #FBBE00 !important;
+  margin: 1rem auto;
+}
+
+.post-users{
+  height: 690px !important;
+}

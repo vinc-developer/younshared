@@ -1,0 +1,51 @@
+ul{
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 0;
+}
+
+li{
+  margin: 2rem auto;
+  list-style: none;
+  cursor: pointer;
+}
+
+.logout{
+  position: absolute;
+  bottom: 20%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.btn-logout{
+  --background: #FBBE00;
+  --color: #3d3b3a;
+  font-weight: bold;
+}
+
+.user{
+  display: flex;
+  padding: 1rem;
+}
+.about-user{
+  margin: 1rem;
+}
+.card-img-profil{
+  margin-right: 1rem;
+  width: 5rem !important;
+  height: 5rem !important;
+
+  ion-img{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    overflow: auto;
+  }
+}
+
+#divider{
+  width: 90% !important;
+  height: 1px !important;
+  background: #FBBE00 !important;
+  margin: 1rem auto;
+}
