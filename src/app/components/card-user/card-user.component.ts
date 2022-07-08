@@ -16,6 +16,7 @@ export class CardUserComponent implements OnInit {
   public hideme: any = [];
   currentUser: User;
   public modal: any = [];
+  public modalPost: any = [];
 
   constructor(private postService: PostsService, private userService: UserService) {}
 
@@ -119,5 +120,16 @@ export class CardUserComponent implements OnInit {
         this.text = '';
       }
     );
+  }
+
+  deletePost(post: Posts) {
+    this.postService.deletePost(post).subscribe(
+      (response) => {
+        this.postsUser.forEach(el => {
+          if(el.id === post.id && el.user.id === this.currentUser.id){
+            this.postsUser.splice(this.postsUser.findIndex(v => v.id === post.id), 1);
+          }
+        });
+      });
   }
 }

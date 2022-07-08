@@ -223,5 +223,7 @@ export class PostsService {
 
   updatePost(post: Posts){}
 
-  deletePost(post: Posts){}
+  deletePost(post: Posts): Observable<any>{
+    return this.http.delete(`${this.baseUrl}/posts/delete-by-id/` + post.id);
+  }
 }

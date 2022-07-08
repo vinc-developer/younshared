@@ -12,12 +12,19 @@
         </div>
       </div>
 
-      <div>
-        <ion-buttons>
+      <div *ngIf="currentUser.id === post.user.id">
+        <ion-buttons (click)="modalPost[index] = !modalPost[index]">
           <ion-button >
             <ion-icon name="ellipsis-vertical-outline"></ion-icon>
           </ion-button>
         </ion-buttons>
+
+        <div class="modal-post-comment" [hidden]="!modalPost[index]">
+          <ul>
+            <li>Modifier</li>
+            <li (click)="deletePost(post)">Supprimer</li>
+          </ul>
+        </div>
       </div>
     </ion-card-header>
     <ion-img src="./assets/images/{{post.picturePost}}"></ion-img>

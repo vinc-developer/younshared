@@ -17,6 +17,7 @@ export class CardHomeComponent implements OnInit {
   user: User;
   public hideme: any = [];
   public modal: any = [];
+  public modalPost: any = [];
 
   constructor(private postService: PostsService, private userService: UserService) {}
 
@@ -117,6 +118,17 @@ export class CardHomeComponent implements OnInit {
           }
         });
         this.text = '';
+      });
+  }
+
+  deletePost(post: Posts) {
+    this.postService.deletePost(post).subscribe(
+      (response) => {
+        this.posts.forEach(el => {
+          if(el.id === post.id && el.user.id === this.user.id){
+            this.posts.splice(this.posts.findIndex(v => v.id === post.id), 1);
+          }
+        });
       });
   }
 }

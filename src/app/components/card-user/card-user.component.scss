@@ -156,3 +156,26 @@ ion-card-content{
     }
   }
 }
+
+.modal-post-comment{
+  position: absolute;
+  right: 0;
+  padding: 0.5rem;
+  background: #3d3b3a;
+  z-index: 4;
+  border: 1px solid #FBBE00;
+  border-radius: 10px;
+
+  ul{
+    margin: 0;
+    padding: 0;
+    background: #3d3b3a !important;
+  }
+
+    li{
+      z-index: 4;
+      list-style: none;
+      color: #FBBE00;
+      cursor: pointer;
+    }
+}
