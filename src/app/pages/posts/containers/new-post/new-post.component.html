@@ -9,7 +9,6 @@
       <ion-title slot="end" class="pointer" (click)="addPost()">Publier</ion-title>
   </ion-toolbar>
 
-
   <div class="card-create">
     <div class="card-img-profil">
       <ion-img src="./assets/images/{{user?.pictureProfil}}"></ion-img>
@@ -24,7 +23,5 @@
     <textarea name="text" id="text" placeholder="De quoi souhaitez-vous discuter ?" [(ngModel)]="text"></textarea>
     <div class="pointer" (click)="addPhoto()"> <ion-icon name="image-outline"></ion-icon>  <span> Ajouter une photo</span></div>
   </div>
-
-
 </ion-content>
 

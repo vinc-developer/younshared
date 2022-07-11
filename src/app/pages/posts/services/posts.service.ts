@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {Posts} from '../models/posts';
-import {UserService} from './user.service';
+import {UserService} from '../../account/services/user.service';
 import { HttpClient } from '@angular/common/http';
-import {environment} from '../../environments/environment';
-import {User} from '../models/user';
+import {environment} from '../../../../environments/environment';
+import {User} from '../../account/models/user';
 import {Comment} from '../models/comment';
 import {Like} from '../models/like';
 

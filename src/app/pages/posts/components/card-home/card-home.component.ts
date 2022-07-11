@@ -1,9 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { FormControl } from '@angular/forms';
 import {Posts} from '../../models/posts';
 import {PostsService} from '../../services/posts.service';
-import {User} from '../../models/user';
-import {UserService} from '../../services/user.service';
+import {User} from '../../../account/models/user';
+import {UserService} from '../../../account/services/user.service';
 import {Comment} from '../../models/comment';
 
 @Component({

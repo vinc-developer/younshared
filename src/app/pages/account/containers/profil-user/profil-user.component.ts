@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from '../../../services/user.service';
-import {User} from '../../../models/user';
-import {Posts} from '../../../models/posts';
-import {PostsService} from '../../../services/posts.service';
+import {UserService} from '../../services/user.service';
+import {User} from '../../models/user';
+import {Posts} from '../../../posts/models/posts';
+import {PostsService} from '../../../posts/services/posts.service';
 
 @Component({
   selector: 'app-profil-user',
@@ -24,17 +24,13 @@ export class ProfilUserComponent implements OnInit {
     this.postService.getAllPostsByUser().subscribe(
       (response) => {
         this.posts = response;
-
       }
     );
-
   }
 
   updateBanniere() {
-
   }
 
   updateImgProfile() {
-
   }
 }

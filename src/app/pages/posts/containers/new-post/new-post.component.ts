@@ -1,8 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {PostsService} from '../../../services/posts.service';
-import {UserService} from '../../../services/user.service';
-import {User} from '../../../models/user';
-import {Posts} from '../../../models/posts';
+import {PostsService} from '../../services/posts.service';
+import {UserService} from '../../../account/services/user.service';
+import {User} from '../../../account/models/user';
+import {Posts} from '../../models/posts';
 
 @Component({
   selector: 'app-new-post',
@@ -29,7 +29,6 @@ export class NewPostComponent implements OnInit {
   }
 
   addPhoto() {
-
   }
 
   addPost() {

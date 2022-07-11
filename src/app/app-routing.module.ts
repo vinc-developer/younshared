@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import {ProfilUserComponent} from './pages/account/profil-user/profil-user.component';
-import { NewPostComponent } from './pages/posts/new-post/new-post.component';
 
 const routes: Routes = [
   {
@@ -9,11 +7,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
   },
   {
-    path: 'profile',
-    component: ProfilUserComponent
-  },{
-    path: 'new-post',
-    component: NewPostComponent
+    path: 'account',
+    loadChildren: () => import('./pages/account/account.module').then(m => m.AccountModule)
+  },
+  {
+    path: 'posts',
+    loadChildren: () => import('./pages/posts/posts.module').then(m => m.PostsModule)
   },
   {
     path: '',

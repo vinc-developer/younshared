@@ -1,4 +1,4 @@
-import {User} from './user';
+import {User} from '../../account/models/user';
 import {Comment} from './comment';
 import {Like} from './like';
 

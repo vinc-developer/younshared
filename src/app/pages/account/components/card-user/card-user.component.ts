@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
-import {Posts} from '../../models/posts';
-import {PostsService} from '../../services/posts.service';
+import { UserService } from 'src/app/pages/account/services/user.service';
+import {Posts} from '../../../posts/models/posts';
+import {PostsService} from '../../../posts/services/posts.service';
 import {User} from '../../models/user';
-import {Comment} from '../../models/comment';
+import {Comment} from '../../../posts/models/comment';
 
 @Component({
   selector: 'app-card-user',

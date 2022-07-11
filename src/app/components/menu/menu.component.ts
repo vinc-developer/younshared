@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
-import {User} from '../../models/user';
+import { UserService } from 'src/app/pages/account/services/user.service';
+import {User} from '../../pages/account/models/user';
 import {NavController} from '@ionic/angular';
 
 @Component({

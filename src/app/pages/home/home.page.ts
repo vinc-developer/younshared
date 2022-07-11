@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {PostsService} from '../../services/posts.service';
-import {Posts} from '../../models/posts';
+import {PostsService} from '../posts/services/posts.service';
+import {Posts} from '../posts/models/posts';
 
 @Component({
   selector: 'app-home',

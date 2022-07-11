@@ -19,7 +19,7 @@ export class BottomBarComponent implements OnInit {
   }
 
   profile(){
-    this.navCtrl.navigateRoot('profile');
+    this.navCtrl.navigateRoot('account/profile');
   }
 
   newPost() {

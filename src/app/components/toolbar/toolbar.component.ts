@@ -1,5 +1,4 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-toolbar',
